@@ -37,16 +37,16 @@ public class SpawnPointSharable {
             }
     ).defaultSerializer(new ProfileEntry(false, "spawnPoint")).altName("spawn").build();
 
-    private static final NamespacedKey SPAWN_LOCATION_KEY = new NamespacedKey(rSpawn.getPlugin(rSpawn.class), "spawn_location");
+    private static final NamespacedKey SPAWN_POINT_KEY = new NamespacedKey(rSpawn.getPlugin(rSpawn.class), "spawn_point");
 
     private static final LocationTagType LOCATION_TAG_TYPE = new LocationTagType();
 
     private static class LocationTagType implements PersistentDataType<PersistentDataContainer, Location> {
 
-        private static NamespacedKey WORLD_KEY = new NamespacedKey(SPAWN_LOCATION_KEY.getKey(), "world_uuid");
-        private static NamespacedKey X_KEY = new NamespacedKey(SPAWN_LOCATION_KEY.getKey(), "x");
-        private static NamespacedKey Y_KEY = new NamespacedKey(SPAWN_LOCATION_KEY.getKey(), "y");
-        private static NamespacedKey Z_KEY = new NamespacedKey(SPAWN_LOCATION_KEY.getKey(), "z");
+        private static NamespacedKey WORLD_KEY = new NamespacedKey(SPAWN_POINT_KEY.getKey(), "world_uuid");
+        private static NamespacedKey X_KEY = new NamespacedKey(SPAWN_POINT_KEY.getKey(), "x");
+        private static NamespacedKey Y_KEY = new NamespacedKey(SPAWN_POINT_KEY.getKey(), "y");
+        private static NamespacedKey Z_KEY = new NamespacedKey(SPAWN_POINT_KEY.getKey(), "z");
 
         @Override
         public @NotNull
@@ -120,10 +120,10 @@ public class SpawnPointSharable {
     }
 
     public static Location getPlayerSpawnPoint(Player player) {
-        return player.getPersistentDataContainer().get(SPAWN_LOCATION_KEY, LOCATION_TAG_TYPE);
+        return player.getPersistentDataContainer().get(SPAWN_POINT_KEY, LOCATION_TAG_TYPE);
     }
 
     public static void setPlayerSpawnPoint(Player player, Location spawnPoint) {
-        player.getPersistentDataContainer().set(SPAWN_LOCATION_KEY, LOCATION_TAG_TYPE, spawnPoint);
+        player.getPersistentDataContainer().set(SPAWN_POINT_KEY, LOCATION_TAG_TYPE, spawnPoint);
     }
 }
