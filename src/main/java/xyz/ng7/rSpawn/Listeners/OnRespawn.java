@@ -24,7 +24,7 @@ public class OnRespawn implements Listener {
     }
 
     @EventHandler
-    public void onJoin(PlayerRespawnEvent e) {
+    public void onRespawn(PlayerRespawnEvent e) {
         Player p = e.getPlayer();
         List<WorldGroup> lwg = i.getGroupManager().getGroupsForWorld(p.getWorld().getName());
 
