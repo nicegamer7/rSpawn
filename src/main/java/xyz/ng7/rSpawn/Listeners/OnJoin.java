@@ -38,8 +38,9 @@ public class OnJoin implements Listener {
             Location sp = Sharables.getPlayerSpawnLocation(p);
 
             if (sp == null) {
-                Sharables.setPlayerSpawnLocation(p, new SpawnLocation(c, p.getWorld()).gen());
-                p.teleport(Sharables.getPlayerSpawnLocation(p));
+                sp = new SpawnLocation(c, p.getWorld()).gen();
+                Sharables.setPlayerSpawnLocation(p, sp);
+                p.teleport(sp);
             }
         }
     }

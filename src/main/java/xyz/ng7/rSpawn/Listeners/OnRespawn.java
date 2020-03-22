@@ -35,11 +35,17 @@ public class OnRespawn implements Listener {
         }
 
         if (g != null) {
-            Location sp = Sharables.getPlayerSpawnLocation(p);
-
             if (e.isBedSpawn()) return;
-            else if (sp != null) e.setRespawnLocation(sp);
-            else {
+
+            Location sp = Sharables.getPlayerSpawnLocation(p);
+            if (sp != null) {
+                if (sp.getY() != sp.getWorld().getHighestBlockYAt(sp)) {
+                    sp.setY(sp.getWorld().getHighestBlockYAt(sp));
+                    Sharables.setPlayerSpawnLocation(p, sp);
+                }
+
+                e.setRespawnLocation(sp);
+            } else {
                 Sharables.setPlayerSpawnLocation(p, new SpawnLocation(c, p.getWorld()).gen());
                 e.setRespawnLocation(Sharables.getPlayerSpawnLocation(p));
             }

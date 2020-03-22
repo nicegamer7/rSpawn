@@ -34,7 +34,7 @@ public class SpawnLocation {
 
             x = randomInt(-xRadius, xRadius);
             z = randomInt(-zRadius, zRadius);
-            y = w.getHighestBlockYAt(x, z);
+            y = w.getHighestBlockYAt(x + 1, z + 1);
 
             for (String b: dB) if (w.getBiome(x, y, z) == Biome.valueOf(b)) {
                 regen = true;
