@@ -21,22 +21,27 @@ public class SpawnLocation {
     }
 
     public Location gen() {
-        boolean a;
-        int x, z;
+        boolean regen;
+        int x, y, z;
+        int xRadius, zRadius;
         List<String> dB = c.getStringList("disabled-biomes");
 
         do {
-            a = false;
+            regen = false;
 
-            x = randomInt(-(c.getInt("radius.x")), c.getInt("radius.x"));
-            z = randomInt(-(c.getInt("radius.z")), c.getInt("radius.z"));
+            xRadius = c.getInt("radius.x");
+            zRadius = c.getInt("radius.z");
 
-            for (String b: dB) if (w.getBiome(x, z) == Biome.valueOf(b)) {
-                a = true;
+            x = randomInt(-xRadius, xRadius);
+            z = randomInt(-zRadius, zRadius);
+            y = w.getHighestBlockYAt(x, z);
+
+            for (String b: dB) if (w.getBiome(x, y, z) == Biome.valueOf(b)) {
+                regen = true;
                 break;
             }
-        } while (a);
+        } while (regen);
 
-        return new Location(w, x + 0.5, w.getHighestBlockYAt(x, z), z + 0.5);
+        return new Location(w, x + 0.5, y, z + 0.5);
     }
 }
