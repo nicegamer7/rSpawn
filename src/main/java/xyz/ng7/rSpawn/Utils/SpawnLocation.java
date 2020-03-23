@@ -8,40 +8,39 @@ import org.bukkit.block.Biome;
 import org.bukkit.configuration.file.FileConfiguration;
 
 public class SpawnLocation {
-    private FileConfiguration c;
     private World w;
+    private int x, z;
+    private List<String> disabledBiomes;
 
     public SpawnLocation(FileConfiguration config, World world) {
-        c = config;
         w = world;
+        x = config.getInt("radius.x");
+        z = config.getInt("radius.z");
+        disabledBiomes = config.getStringList("disabled-biomes");
     }
 
-    private int randomInt(int min, int max) {
-        return ThreadLocalRandom.current().nextInt(min, max + 1);
+    public int randomInt(boolean x) {
+        if (x) return ThreadLocalRandom.current().nextInt(-this.x, this.x + 1);
+        return ThreadLocalRandom.current().nextInt(-this.z, this.z + 1);
     }
 
     public Location gen() {
         boolean regen;
         int x, y, z;
-        int xRadius, zRadius;
-        List<String> dB = c.getStringList("disabled-biomes");
 
         do {
             regen = false;
 
-            xRadius = c.getInt("radius.x");
-            zRadius = c.getInt("radius.z");
+            x = randomInt(true);
+            z = randomInt(false);
+            y = w.getHighestBlockYAt(x, z);
 
-            x = randomInt(-xRadius, xRadius);
-            z = randomInt(-zRadius, zRadius);
-            y = w.getHighestBlockYAt(x + 1, z + 1);
-
-            for (String b: dB) if (w.getBiome(x, y, z) == Biome.valueOf(b)) {
+            for (String b: this.disabledBiomes) if (w.getBiome(x, y, z) == Biome.valueOf(b)) {
                 regen = true;
                 break;
             }
         } while (regen);
 
-        return new Location(w, x + 0.5, y, z + 0.5);
+        return new Location(w, x - 0.5, y, z - 0.5);
     }
 }
