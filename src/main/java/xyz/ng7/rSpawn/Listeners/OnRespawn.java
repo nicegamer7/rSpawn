@@ -2,9 +2,8 @@ package xyz.ng7.rSpawn.Listeners;
 
 import com.onarandombox.multiverseinventories.MultiverseInventories;
 import com.onarandombox.multiverseinventories.WorldGroup;
-import java.util.List;
-
 import com.onarandombox.multiverseinventories.share.Sharables;
+import java.util.List;
 import org.bukkit.Location;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
