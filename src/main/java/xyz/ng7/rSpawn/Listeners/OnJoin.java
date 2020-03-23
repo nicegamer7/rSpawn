@@ -2,9 +2,8 @@ package xyz.ng7.rSpawn.Listeners;
 
 import com.onarandombox.multiverseinventories.MultiverseInventories;
 import com.onarandombox.multiverseinventories.WorldGroup;
-import java.util.List;
-
 import com.onarandombox.multiverseinventories.share.Sharables;
+import java.util.List;
 import org.bukkit.Location;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
@@ -34,14 +33,10 @@ public class OnJoin implements Listener {
             break;
         }
 
-        if (g != null) {
-            Location sp = Sharables.getPlayerSpawnLocation(p);
-
-            if (sp == null) {
-                sp = new SpawnLocation(c, p.getWorld()).gen();
-                Sharables.setPlayerSpawnLocation(p, sp);
-                p.teleport(sp);
-            }
+        if (g != null && Sharables.getPlayerSpawnLocation(p) == null) {
+            Location sp = new SpawnLocation(c, p.getWorld()).gen();
+            Sharables.setPlayerSpawnLocation(p, sp);
+            p.teleport(sp);
         }
     }
 }
