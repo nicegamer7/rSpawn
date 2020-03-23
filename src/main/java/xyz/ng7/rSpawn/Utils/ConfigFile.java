@@ -22,7 +22,7 @@ public class ConfigFile {
             if(!f.exists()) rS.saveDefaultConfig();
 
             c = rS.getConfig();
-        } catch(Exception e) {
+        } catch (Exception e) {
             rS.getLogger().severe("Cannot read data folder. Disabling plugin.");
             rS.getPluginLoader().disablePlugin(rS);
         }
