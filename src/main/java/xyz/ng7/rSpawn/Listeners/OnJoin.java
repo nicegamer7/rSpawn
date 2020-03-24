@@ -18,15 +18,15 @@ public class OnJoin implements Listener {
     private MultiverseInventories i;
     private String g;
 
-    public OnJoin(rSpawn rS) {
-        c = rS.getConfigFile();
-        i = rS.getInventories();
+    public OnJoin(rSpawn r) {
+        this.c = r.getConfigFile();
+        this.i = r.getInventories();
     }
 
     @EventHandler
     public void onJoin(PlayerChangedWorldEvent e) {
         Player p = e.getPlayer();
-        List<WorldGroup> lwg = i.getGroupManager().getGroupsForWorld(p.getWorld().getName());
+        List<WorldGroup> lwg = this.i.getGroupManager().getGroupsForWorld(p.getWorld().getName());
 
         for (WorldGroup fg: lwg) if (fg.isSharing(Sharables.SPAWN_LOCATION)) {
             g = fg.getName();
@@ -34,7 +34,7 @@ public class OnJoin implements Listener {
         }
 
         if (g != null && Sharables.getPlayerSpawnLocation(p) == null) {
-            Location sp = new SpawnLocation(c, p.getWorld()).gen();
+            Location sp = new SpawnLocation(this.c, p.getWorld()).gen();
             Sharables.setPlayerSpawnLocation(p, sp);
             p.teleport(sp);
         }

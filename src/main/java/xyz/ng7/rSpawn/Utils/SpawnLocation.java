@@ -33,14 +33,14 @@ public class SpawnLocation {
 
             x = randomInt(true);
             z = randomInt(false);
-            y = w.getHighestBlockYAt(x, z);
+            y = this.w.getHighestBlockYAt(x, z);
 
-            for (String b: this.disabledBiomes) if (w.getBiome(x, y, z) == Biome.valueOf(b)) {
+            for (String b: this.disabledBiomes) if (this.w.getBiome(x, y, z) == Biome.valueOf(b)) {
                 regen = true;
                 break;
             }
         } while (regen);
 
-        return new Location(w, x - 0.5, y, z - 0.5);
+        return new Location(this.w, x - 0.5, y, z - 0.5);
     }
 }

@@ -5,26 +5,26 @@ import org.bukkit.configuration.file.FileConfiguration;
 import xyz.ng7.rSpawn.rSpawn;
 
 public class ConfigFile {
-    private rSpawn rS;
+    private rSpawn r;
 
-    public ConfigFile(rSpawn rSpawn) {
-        rS = rSpawn;
+    public ConfigFile(rSpawn r) {
+        this.r = r;
     }
 
     public FileConfiguration run() {
         FileConfiguration c = null;
 
         try {
-            if (!rS.getDataFolder().exists()) rS.getDataFolder().mkdirs();
+            if (!this.r.getDataFolder().exists()) this.r.getDataFolder().mkdirs();
 
-            File f = new File(rS.getDataFolder(), "config.yml");
+            File f = new File(this.r.getDataFolder(), "config.yml");
 
-            if(!f.exists()) rS.saveDefaultConfig();
+            if(!f.exists()) this.r.saveDefaultConfig();
 
-            c = rS.getConfig();
+            c = this.r.getConfig();
         } catch (Exception e) {
-            rS.getLogger().severe("Cannot read data folder. Disabling plugin.");
-            rS.getPluginLoader().disablePlugin(rS);
+            this.r.getLogger().severe("Cannot read data folder. Disabling plugin.");
+            this.r.getPluginLoader().disablePlugin(this.r);
         }
 
         return c;

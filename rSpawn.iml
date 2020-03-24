@@ -18,6 +18,7 @@
     <orderEntry type="library" name="Maven: org.yaml:snakeyaml:1.25" level="project" />
     <orderEntry type="library" name="Maven: com.onarandombox.multiversecore:Multiverse-Core:4.1.1-SNAPSHOT" level="project" />
     <orderEntry type="library" name="Maven: com.onarandombox.multiverseinventories:Multiverse-Inventories:4.0.0-SNAPSHOT" level="project" />
+    <orderEntry type="library" name="Maven: me.lucko:commodore:1.7" level="project" />
     <orderEntry type="library" name="Maven: com.mojang:brigadier:1.0.17" level="project" />
   </component>
 </module>

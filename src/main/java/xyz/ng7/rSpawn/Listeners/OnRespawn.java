@@ -18,15 +18,15 @@ public class OnRespawn implements Listener {
     private MultiverseInventories i;
     private String g;
 
-    public OnRespawn(rSpawn rS) {
-        c = rS.getConfigFile();
-        i = rS.getInventories();
+    public OnRespawn(rSpawn r) {
+        this.c = r.getConfigFile();
+        this.i = r.getInventories();
     }
 
     @EventHandler
     public void onRespawn(PlayerRespawnEvent e) {
         Player p = e.getPlayer();
-        List<WorldGroup> lwg = i.getGroupManager().getGroupsForWorld(p.getWorld().getName());
+        List<WorldGroup> lwg = this.i.getGroupManager().getGroupsForWorld(p.getWorld().getName());
 
         for (WorldGroup fg: lwg) if (fg.isSharing(Sharables.SPAWN_LOCATION)) {
             g = fg.getName();
@@ -45,7 +45,7 @@ public class OnRespawn implements Listener {
 
                 e.setRespawnLocation(sp);
             } else {
-                Sharables.setPlayerSpawnLocation(p, new SpawnLocation(c, p.getWorld()).gen());
+                Sharables.setPlayerSpawnLocation(p, new SpawnLocation(this.c, p.getWorld()).gen());
                 e.setRespawnLocation(Sharables.getPlayerSpawnLocation(p));
             }
         }
