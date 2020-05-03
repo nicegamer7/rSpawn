@@ -1,5 +1,29 @@
 name: rSpawn
 version: 1.2.0
+api-version: 1.15
+author: nicegamer7
 main: xyz.ng7.rSpawn.rSpawn
-depend:
-  - Multiverse-Inventories
+description: Gives each player their own spawn point.
+depend: [Multiverse-Inventories]
+commands:
+  rspawn:
+    description: The rSpawn command.
+    usage: /<command> [get|set]
+permissions:
+  rspawn.get.self:
+    description: Permission to get spawn point for player.
+  rspawn.get.other:
+    description: Permission to get spawn point for other players.
+  rspawn.get:
+    description: Permission to get spawn point for all players.
+    children: [rspawn.get.self, rspawn.get.other]
+  rspawn.set.self:
+    description: Permission to set spawn point for player.
+  rspawn.set.other:
+    description: Permission to set spawn point for other players.
+  rspawn.set:
+    description: Permission to set spawn point for all players.
+    children: [rspawn.set.self, rspawn.set.other]
+  rspawn.*:
+    description: Permission to use all rSpawn commands
+    children: [rspawn.get, rspawn.set]

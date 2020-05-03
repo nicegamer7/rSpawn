@@ -5,10 +5,12 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 import xyz.ng7.rSpawn.Listeners.OnJoin;
 import xyz.ng7.rSpawn.Listeners.OnRespawn;
+import xyz.ng7.rSpawn.MultiverseInventories.SpawnPointSharable;
 import xyz.ng7.rSpawn.Utils.ConfigFile;
 
 public class rSpawn extends JavaPlugin {
     private FileConfiguration config;
+    private SpawnPointSharable sharable;
     private MultiverseInventories inventories;
 
     public rSpawn() {
@@ -18,7 +20,7 @@ public class rSpawn extends JavaPlugin {
         if (inventories == null) {
             getLogger().severe("Multiverse Inventories not found. Disabling plugin.");
             getServer().getPluginManager().disablePlugin(this);
-        }
+        } else sharable = new SpawnPointSharable(this);
     }
 
     private void checkConfigVersion() {
